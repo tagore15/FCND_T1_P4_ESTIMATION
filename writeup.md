@@ -15,28 +15,28 @@ You're reading it! Below I describe how I addressed each rubric point and where 
 #### Determine the standard deviation of the measurement noise of both GPS X data and Accelerometer X data.
 
 After choosing scenario 06_NoisySensors in simulation, we record sensor data on a static quad and take logs for GPS X position and accelerometer's x measurement. We take standard deviation from logs through below code in python.   
-'''
+```
 df = pd.read_csv('F:/FCND/P4/FCND-Estimation-CPP/config/log/Graph1.txt')
 df[' Quad.GPS.X'].std()
-'''
+```
 
-'''
+```
 df = pd.read_csv('F:/FCND/P4/FCND-Estimation-CPP/config/log/Graph2.txt')
 df[' Quad.IMU.AX'].std()
-'''
+```
 
 We put following numbers in `06_SensorNoise.txt` as std values found above
-'''
+```
 MeasuredStdDev_GPSPosXY = 0.7146
 MeasuredStdDev_AccelXY = 0.4895 
-'''
+```
 
 With these values, Simulator pass the required scenario as in below logs and image.
-'''
+```
 Simulation #4 (../config/06_SensorNoise.txt)
 PASS: ABS(Quad.GPS.X-Quad.Pos.X) was less than MeasuredStdDev_GPSPosXY for 71% of the time
 PASS: ABS(Quad.IMU.AX-0.000000) was less than MeasuredStdDev_AccelXY for 68% of the time
-'''
+```
 
 ![Udacity's FCND Simulator](./images/06_SensorNoise.PNG)
 
@@ -44,10 +44,10 @@ PASS: ABS(Quad.IMU.AX-0.000000) was less than MeasuredStdDev_AccelXY for 68% of 
 
 We implemented a better rate gyro attitude integration scheme containing already implemented complementary type attitude filter.
 
-'''
+```
 Simulation #9 (../config/07_AttitudeEstimation.txt)
 PASS: ABS(Quad.Est.E.MaxEuler) was less than 0.100000 for at least 3.000000 seconds
-'''
+```
 
 ![Udacity's FCND Simulator](./images/07_AttitudeEstimation.PNG)
 
@@ -60,11 +60,11 @@ In QuadEstimatorEKF.cpp, we calculated the partial derivative of the body-to-glo
 #### Implement the magnetometer update.
 After updating magnetometer in function `UpdateFromMag`, we are able to pass yaw related scenario. 
 
-'''
+```
 Simulation #62 (../config/10_MagUpdate.txt)
 PASS: ABS(Quad.Est.E.Yaw) was less than 0.120000 for at least 10.000000 seconds
 PASS: ABS(Quad.Est.E.Yaw-0.000000) was less than Quad.Est.S.Yaw for 64% of the time
-'''
+```
 
 ![Udacity's FCND Simulator](./images/10_MagUpdate.PNG)
 
@@ -73,10 +73,10 @@ After integrating following update equation for GPS, we were able to successfull
 ![Udacity's FCND Simulator](./images/GPSEquation.PNG)
 
 Following logs are logs after updating GPS
-'''
+```
 Simulation #82 (../config/11_GPSUpdate.txt)
 PASS: ABS(Quad.Est.E.Pos) was less than 1.000000 for at least 20.000000 seconds
-'''
+```
 
 ![Udacity's FCND Simulator](./images/11_GPSUpdate.PNG)
 
